@@ -1,0 +1,29 @@
+class Solution {
+   static bool cmp(pair<int, int> &i, pair<int, int> &j){
+        if(i.second==j.second){
+            return i.first>j.first;
+        }
+        else{
+            return i.second>j.second;
+        }
+    }
+  public:
+    vector<int> topKFrequent(vector<int> &arr, int k) {
+        // Your code here
+        unordered_map<int, int> mp;
+        for (int i=0; i< arr.size(); i++){
+            mp[arr[i]]++;
+        }
+        vector<pair<int, int>> vec;
+       for (auto i: mp){
+           vec.push_back(make_pair(i.first, i.second));
+       }
+       sort(vec.begin(), vec.end(), cmp);
+       vector<int> ans;
+       for (int i=0; i<k; i++){
+           ans.push_back(vec[i].first);
+       }
+       return ans;
+       
+    }
+};
